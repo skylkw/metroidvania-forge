@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bgpy7yf8retbj"]
+
+[ext_resource type="PackedScene" uid="uid://cvr0434jrndbl" path="res://player/player.tscn" id="1_rupst"]
+
+[sub_resource type="Gradient" id="Gradient_edjgo"]
+offsets = PackedFloat32Array(0, 0.010126582)
+colors = PackedColorArray(0, 0, 0, 1, 0.011432111, 0.011432111, 0.011432111, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rupst"]
+gradient = SubResource("Gradient_edjgo")
+width = 32
+height = 32
+fill_from = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
+size = Vector2(32, 32)
+
+[node name="Playground" type="Node2D" unique_id=1709053163]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=734665563]
+position = Vector2(234.5, 245.5)
+scale = Vector2(15.406251, 1.53125)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=741568044]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=957877127]
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1096578386]
+position = Vector2(-4.7683716e-07, 134.5)
+scale = Vector2(0.71874994, 8.46875)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2" unique_id=1748773879]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/StaticBody2D" unique_id=1807260516]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=714519894]
+position = Vector2(239.49998, -12.503043)
+scale = Vector2(15.71875, 1.5623097)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D3" unique_id=1171917711]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D3/StaticBody2D" unique_id=676794545]
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=203086748]
+position = Vector2(478.99997, 134.5)
+scale = Vector2(0.71874994, 8.46875)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D4" unique_id=1528900507]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D4/StaticBody2D" unique_id=937756410]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1963120532]
+position = Vector2(36, 192.00002)
+scale = Vector2(1.7992419, 1.8425293)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D5" unique_id=70293914]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D5/StaticBody2D" unique_id=1527194879]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=578978747]
+position = Vector2(140, 228)
+rotation = 0.37136525
+scale = Vector2(5.887103, 2.0797594)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D6" unique_id=1375807172]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D6/StaticBody2D" unique_id=724185710]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Sprite2D7" type="Sprite2D" parent="." unique_id=1142065420]
+position = Vector2(329, 193.00002)
+scale = Vector2(1.7992419, 1.8425293)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D7" unique_id=784436581]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D7/StaticBody2D" unique_id=1458846481]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="Player" parent="." unique_id=879996293 instance=ExtResource("1_rupst")]
+position = Vector2(242, 147)
