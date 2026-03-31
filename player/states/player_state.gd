@@ -1,4 +1,4 @@
-@icon("res://player/stetes/state.svg")
+@icon("res://player/states/state.svg")
 class_name PlayerState extends Node
 
 var player: Player

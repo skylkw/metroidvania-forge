@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cvr0434jrndbl"]
 
 [ext_resource type="Script" uid="uid://cxsoib3qjogbi" path="res://player/scripts/player.gd" id="1_oul6g"]
-[ext_resource type="Script" uid="uid://eaw0esrhbt8w" path="res://player/stetes/idle.gd" id="2_g1dw6"]
-[ext_resource type="Script" uid="uid://dg0uxp6ut2ubv" path="res://player/stetes/run.gd" id="3_yw30f"]
-[ext_resource type="Script" uid="uid://dy3tao7wjekmi" path="res://player/stetes/jump.gd" id="4_qjkh3"]
-[ext_resource type="Script" uid="uid://doesg6lgyb1yv" path="res://player/stetes/fall.gd" id="5_g6k8r"]
-[ext_resource type="Script" uid="uid://cirwkog2lynoi" path="res://player/stetes/crouch.gd" id="6_g6k8r"]
+[ext_resource type="Script" uid="uid://eaw0esrhbt8w" path="res://player/states/idle.gd" id="2_g1dw6"]
+[ext_resource type="Script" uid="uid://dg0uxp6ut2ubv" path="res://player/states/run.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://dy3tao7wjekmi" path="res://player/states/jump.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://doesg6lgyb1yv" path="res://player/states/fall.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://cirwkog2lynoi" path="res://player/states/crouch.gd" id="6_g6k8r"]
 
 [sub_resource type="Gradient" id="Gradient_kqu6x"]
 offsets = PackedFloat32Array(0.025316456, 0.47594938, 0.721519, 0.96455693)
@@ -20,7 +20,12 @@ fill_from = Vector2(0.06410257, 0.96581197)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqu6x"]
 size = Vector2(16, 46)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
+size = Vector2(16, 30)
+
 [node name="Player" type="CharacterBody2D" unique_id=879996293]
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_oul6g")
 
 [node name="States" type="Node" parent="." unique_id=1241687087]
@@ -51,9 +56,14 @@ deceleration_rate = 200.0
 position = Vector2(0, -24)
 texture = SubResource("GradientTexture2D_oul6g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1778694389]
+[node name="CollisionStand" type="CollisionShape2D" parent="." unique_id=1778694389]
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_kqu6x")
+
+[node name="CollisionCrouch" type="CollisionShape2D" parent="." unique_id=867838735]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_g6k8r")
+disabled = true
 
 [node name="Label" type="Label" parent="." unique_id=1366743697]
 offset_left = -42.0
@@ -63,3 +73,8 @@ offset_bottom = -54.0
 theme_override_font_sizes/font_size = 12
 text = "Label"
 horizontal_alignment = 1
+
+[node name="OneWayPlatformRaycast" type="RayCast2D" parent="." unique_id=855357428]
+target_position = Vector2(0, 4)
+collision_mask = 2
+hit_from_inside = true

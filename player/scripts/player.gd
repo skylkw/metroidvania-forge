@@ -1,4 +1,5 @@
 class_name Player extends CharacterBody2D
+
 const DEBUG_JUMP_INDICATOR = preload("uid://bipj6qgwefvf")
 
 @export var move_speed: float = 100
@@ -12,6 +13,10 @@ var previous_state: PlayerState:
 var direction: Vector2 = Vector2.ZERO
 var gravity: float = 980.0
 var gravity_scale: float = 1.0
+
+@onready var collision_stand: CollisionShape2D = $CollisionStand
+@onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+@onready var one_way_platform_raycast: RayCast2D = $OneWayPlatformRaycast
 
 
 func _ready() -> void:

@@ -15,6 +15,16 @@ fill_from = Vector2(0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(32, 32)
 
+[sub_resource type="Gradient" id="Gradient_rupst"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.92877746, 0.8721753, 0.99264306, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wt17y"]
+gradient = SubResource("Gradient_rupst")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8u5f"]
+size = Vector2(64, 64)
+
 [node name="Playground" type="Node2D" unique_id=1709053163]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=734665563]
@@ -83,7 +93,7 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_edjgo")
 
 [node name="Sprite2D7" type="Sprite2D" parent="." unique_id=1142065420]
-position = Vector2(329, 193.00002)
+position = Vector2(411, 193.00002)
 scale = Vector2(1.7992419, 1.8425293)
 texture = SubResource("GradientTexture2D_rupst")
 
@@ -93,5 +103,19 @@ texture = SubResource("GradientTexture2D_rupst")
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_edjgo")
 
+[node name="OneWayPlatform" type="Sprite2D" parent="." unique_id=1837549467]
+position = Vector2(255.99998, 155.25)
+scale = Vector2(2.8515625, 0.3359374)
+texture = SubResource("GradientTexture2D_wt17y")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="OneWayPlatform" unique_id=513612103]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatform/StaticBody2D" unique_id=1869854102]
+scale = Vector2(0.99999994, 1)
+shape = SubResource("RectangleShape2D_m8u5f")
+one_way_collision = true
+
 [node name="Player" parent="." unique_id=879996293 instance=ExtResource("1_rupst")]
-position = Vector2(242, 147)
+position = Vector2(246, 95)
