@@ -1,8 +1,5 @@
 class_name PlayStateIdle extends PlayerState
 
-# 下蹲输入阈值，避免直接在逻辑中写 0.5 这样的魔法数字。
-const CROUCH_INPUT_THRESHOLD: float = 0.5
-
 
 func init() -> void:
 	# 预留初始化入口：后续可在这里缓存节点、注册信号或读取配置。
@@ -10,8 +7,7 @@ func init() -> void:
 
 
 func enter() -> void:
-	# 预留进入状态入口：后续可接入动画、特效、音效等。
-	pass
+	player.animation_player.play("idle")
 
 
 func exit() -> void:
@@ -30,8 +26,8 @@ func process(_delta: float) -> PlayerState:
 	# 只要有水平输入就切换到 Run。
 	if player.direction.x != 0.0:
 		return run
-	# 下方向输入超过阈值则进入 Crouch。
-	if player.direction.y > CROUCH_INPUT_THRESHOLD:
+	# 向下输入达到阈值进入 Crouch。
+	if player.direction.y > player.crouch_threshold:
 		return crouch
 	return null
 

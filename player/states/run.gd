@@ -1,7 +1,6 @@
 class_name PlayStateRun extends PlayerState
 
-# 下蹲输入阈值，统一与其他状态一致，避免魔法数字散落。
-const CROUCH_INPUT_THRESHOLD: float = 0.5
+
 
 
 func init() -> void:
@@ -10,8 +9,7 @@ func init() -> void:
 
 
 func enter() -> void:
-	# 预留进入入口：后续可触发跑步动画或粒子效果。
-	pass
+	player.animation_player.play("run")
 
 
 func exit() -> void:
@@ -31,7 +29,7 @@ func process(_delta: float) -> PlayerState:
 	if player.direction.x == 0.0:
 		return idle
 	# 向下输入达到阈值时进入下蹲。
-	if player.direction.y > CROUCH_INPUT_THRESHOLD:
+	if player.direction.y > player.crouch_threshold:
 		return crouch
 	return null
 

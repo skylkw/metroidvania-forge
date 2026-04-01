@@ -6,22 +6,105 @@
 [ext_resource type="Script" uid="uid://dy3tao7wjekmi" path="res://player/states/jump.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://doesg6lgyb1yv" path="res://player/states/fall.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cirwkog2lynoi" path="res://player/states/crouch.gd" id="6_g6k8r"]
+[ext_resource type="Texture2D" uid="uid://ds06sxmv7u4q" path="res://player/sprites/hero.png" id="7_boad6"]
 
-[sub_resource type="Gradient" id="Gradient_kqu6x"]
-offsets = PackedFloat32Array(0.025316456, 0.47594938, 0.721519, 0.96455693)
-colors = PackedColorArray(0.10056438, 0.38367605, 0.5399947, 1, 0.95981675, 0.87777746, 0.6712085, 1, 0.98959285, 0.8948998, 0.6757555, 1, 0.98959285, 0.8948998, 0.6757555, 1)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boad6"]
+radius = 8.0
+height = 50.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_oul6g"]
-gradient = SubResource("Gradient_kqu6x")
-width = 18
-height = 48
-fill_from = Vector2(0.06410257, 0.96581197)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rgyib"]
+radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqu6x"]
-size = Vector2(16, 46)
+[sub_resource type="Animation" id="Animation_rgyib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
-size = Vector2(16, 30)
+[sub_resource type="Animation" id="Animation_hg6s5"]
+resource_name = "crouch"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_8t03j"]
+resource_name = "idle"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2ieo8"]
+resource_name = "jump"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28]
+}
+
+[sub_resource type="Animation" id="Animation_ebec5"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 18, 19, 12, 13]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yllr7"]
+_data = {
+&"RESET": SubResource("Animation_rgyib"),
+&"crouch": SubResource("Animation_hg6s5"),
+&"idle": SubResource("Animation_8t03j"),
+&"jump": SubResource("Animation_2ieo8"),
+&"run": SubResource("Animation_ebec5")
+}
 
 [node name="Player" type="CharacterBody2D" unique_id=879996293]
 collision_layer = 0
@@ -45,24 +128,24 @@ script = ExtResource("4_qjkh3")
 [node name="Fall" type="Node" parent="States" unique_id=932110280]
 unique_name_in_owner = true
 script = ExtResource("5_g6k8r")
-coyote_time = 0.125
 
 [node name="Crouch" type="Node" parent="States" unique_id=2020577378]
 unique_name_in_owner = true
 script = ExtResource("6_g6k8r")
-deceleration_rate = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=892133446]
-position = Vector2(0, -24)
-texture = SubResource("GradientTexture2D_oul6g")
+position = Vector2(0, -40)
+texture = ExtResource("7_boad6")
+hframes = 16
+vframes = 4
 
 [node name="CollisionStand" type="CollisionShape2D" parent="." unique_id=1778694389]
-position = Vector2(0, -24)
-shape = SubResource("RectangleShape2D_kqu6x")
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_boad6")
 
 [node name="CollisionCrouch" type="CollisionShape2D" parent="." unique_id=867838735]
-position = Vector2(0, -16)
-shape = SubResource("RectangleShape2D_g6k8r")
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_rgyib")
 disabled = true
 
 [node name="Label" type="Label" parent="." unique_id=1366743697]
@@ -75,6 +158,9 @@ text = "Label"
 horizontal_alignment = 1
 
 [node name="OneWayPlatformRaycast" type="RayCast2D" parent="." unique_id=855357428]
-target_position = Vector2(0, 4)
+target_position = Vector2(0, 10)
 collision_mask = 2
-hit_from_inside = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=275480272]
+libraries/ = SubResource("AnimationLibrary_yllr7")
+autoplay = &"idle"

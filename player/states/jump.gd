@@ -1,10 +1,5 @@
 class_name PlayStateJump extends PlayerState
 
-# 提前松开跳跃键时的纵向速度缩放系数，用于短跳。
-const SHORT_HOP_RELEASE_MULTIPLIER: float = 0.5
-
-@export var jump_speed: float = 450.0
-
 
 func init() -> void:
 	# 预留初始化入口：后续可扩展为多段跳配置加载。
@@ -12,10 +7,16 @@ func init() -> void:
 
 
 func enter() -> void:
-	# 进入 Jump 时给一个向上的初速度。
+	player.animation_player.play("jump")
+	player.animation_player.pause()
+	# 进入 Jump 时应用向上的初速度。
 	player.add_debug_jump_indicator(Color.GREEN)
-	player.velocity.y = - jump_speed
-
+	player.velocity.y = - player.jump_speed
+	
+	# 检查是否是缓冲区跳跃
+	if player.get_history_state(0) == fall and not Input.is_action_pressed("jump"):
+		player.velocity.y *= player.short_hop_scale
+	
 
 func exit() -> void:
 	# 离开 Jump 时保留调试可视化，便于观察状态切换点。
@@ -26,14 +27,13 @@ func handle_input(event: InputEvent) -> PlayerState:
 	# 松开跳跃键时触发短跳，但不立即切换到 Fall。
 	# 这样状态切换统一由 physics_process 的速度判断驱动。
 	if event.is_action_released("jump"):
-		player.velocity.y *= SHORT_HOP_RELEASE_MULTIPLIER
+		player.velocity.y *= player.short_hop_scale
 		return null
 	return null
 
 
 func process(_delta: float) -> PlayerState:
-	# 预留逐帧逻辑入口，当前 Jump 逻辑主要在 physics_process 中处理。
-	pass
+	set_jump_frame()
 	return null
 
 
@@ -50,3 +50,7 @@ func physics_transition(_delta: float) -> PlayerState:
 	if player.velocity.y >= 0.0:
 		return fall
 	return null
+	
+func set_jump_frame() -> void:
+	var frame: float = remap(player.velocity.y, -player.jump_speed, 0.0, 0.0, 0.5)
+	player.animation_player.seek(frame, true)
