@@ -110,6 +110,7 @@ _data = {
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_oul6g")
+coyote_time = 0.2
 
 [node name="States" type="Node" parent="." unique_id=1241687087]
 
